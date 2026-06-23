@@ -1,75 +1,137 @@
-# QuickDash
+# Quick Dash App
 
-A quick-commerce delivery web app that connects customers with local shops for fast delivery. Built as a pure frontend app (HTML/CSS/JS) with a lightweight Node.js backend for payment verification.
+## Overview
 
-## Project Structure
+Quick Dash App is a hyperlocal commerce platform designed to help local shops compete with large delivery platforms by enabling direct product delivery to nearby customers.
 
-```
-Quick Dash Final/
-├── index.html          # Entry point — redirects to discover
-├── .env.example        # Environment variable template
-├── backend/            # Node.js payment verification server
-├── shared/             # Shared utilities (auth, database, integrations)
-├── discover/           # Home / category browse page
-├── shops/              # Shop listing page
-├── shop/               # Individual shop & product page
-├── cart/               # Shopping cart
-├── payment/            # Checkout & payment
-├── orders/             # Order history
-├── track/              # Live order tracking
-├── signup/             # Sign up & sign in
-├── admin/              # Admin dashboard (Aegis Command Center)
-├── partner/            # Delivery partner dashboard
-└── yourstore/          # Merchant store management dashboard
-```
+Unlike warehouse-based delivery services, Quick Dash allows merchants to sell and deliver products directly from their existing stores without maintaining additional storage infrastructure.
 
-## User Flows
+The platform connects four different types of users: Customers, Merchants, Delivery Partners, and Administrators, creating a complete local delivery ecosystem.
 
-**Customer:** Discover → Shops → Shop (add to cart) → Cart → Payment → Track → Orders
+---
 
-**Merchant:** Sign up as merchant → YourStore dashboard (manage inventory, accept orders)
+## Problem Statement
 
-**Delivery Partner:** Sign up as partner → Partner dashboard (accept deliveries, track earnings)
+Many local businesses are experiencing declining sales due to the rise of large instant-delivery platforms. These businesses often lack the resources to build their own digital ordering and delivery systems.
 
-**Admin:** Admin panel → Manage users, shops, complaints, verifications
+Quick Dash App aims to bridge this gap by providing a platform that allows local shops to:
 
-## Tech Stack
+* Reach nearby customers online
+* Manage orders efficiently
+* Coordinate deliveries
+* Operate digitally without additional warehouse costs
 
-- **Frontend:** Vanilla HTML, CSS, JavaScript (no frameworks)
-- **Storage:** `localStorage` for session, cart, orders, and mock database
-- **Maps:** Google Maps JavaScript API (reverse geocoding + delivery map)
-- **Payments:** Razorpay (UPI, cards, net banking)
-- **Backend:** Node.js + Express (Razorpay signature verification only)
+---
 
-## Quick Start
+## Key Features
 
-1. Clone the repo.
-2. Copy config files:
-   ```bash
-   cp shared/integrations.config.example.js shared/integrations.config.js
-   cp .env.example backend/.env
-   ```
-3. Fill in your API keys in both files:
-   - `shared/integrations.config.js` → Google Maps API key + Razorpay Key ID
-   - `backend/.env` → Razorpay Key Secret
-4. Start the backend:
-   ```bash
-   node backend/payment-verification-server.js
-   ```
-5. Open `index.html` in a browser (or serve via a local HTTP server).
+### Customer Module
 
-## Environment Variables
+* Browse nearby local stores
+* View available products
+* Place orders
+* Track order status
 
-See `.env.example`:
+### Merchant Module
 
-| Variable | Description |
-|---|---|
-| `RAZORPAY_KEY_SECRET` | Your Razorpay secret key (server-side only) |
-| `ALLOWED_ORIGIN` | CORS origin for the frontend (e.g. `http://localhost:3456`) |
-| `PORT` | Port for the backend server (default `8787`) |
+* Manage products and inventory
+* Receive customer orders
+* Process and update order status
+* Manage business operations
 
-## Notes
+### Delivery Partner Module
 
-- All data is stored in `localStorage` — this is a demo/prototype app, not production-ready.
-- The `mcp-shield.db` file is a local SQLite file used during development tooling; it is not part of the app's runtime.
-- Never commit `shared/integrations.config.js` or `backend/.env` — both are in `.gitignore`.
+* Accept delivery requests
+* View assigned deliveries
+* Update delivery progress
+* Complete deliveries
+
+### Admin Module
+
+* Manage merchants
+* Manage delivery partners
+* Monitor platform activity
+* Control overall system operations
+
+---
+
+## Service Radius
+
+Quick Dash App follows a hyperlocal delivery model.
+
+* Customers can discover stores within a 3 km radius.
+* Merchants serve nearby customers only.
+* Delivery operations are optimized for local communities.
+
+This approach helps reduce delivery time while supporting neighborhood businesses.
+
+---
+
+## Technology Stack
+
+### Frontend
+
+* HTML
+* CSS
+* JavaScript
+
+### Data Storage
+
+* Browser LocalStorage
+
+The current version uses LocalStorage for data persistence and demonstrates the complete application workflow without requiring external database infrastructure.
+
+---
+
+## Responsive Design
+
+The application is designed to work across multiple devices:
+
+* Desktop Computers
+* Laptops
+* Tablets
+* Mobile Phones
+
+---
+
+## Current Status
+
+### MVP Completed
+
+The current version successfully demonstrates:
+
+* Multi-user workflow
+* Order management process
+* Merchant operations
+* Delivery partner interactions
+* Administrative controls
+
+---
+
+## Future Enhancements
+
+* Firebase / Supabase integration
+* User authentication system
+* Real-time order tracking
+* Payment gateway integration
+* Push notifications
+* Delivery route optimization
+* Merchant analytics dashboard
+* Native mobile application
+
+---
+
+## Vision
+
+Quick Dash App was created with the goal of empowering local businesses by providing them with digital tools to compete in an increasingly online marketplace while preserving the importance of neighborhood commerce.
+
+---
+
+## Author
+
+Mayukh Ghosh
+
+B.Tech CSE (AI & ML)
+
+Focused on building technology solutions that solve real-world problems.
+
