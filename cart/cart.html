@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Cart — QuickDash</title>
+  <meta name="description" content="Review your items and proceed to secure payment on QuickDash." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Import discover.css to reuse premium global tokens, header, footer, drawer styles -->
+  <link rel="stylesheet" href="../discover/discover.css" />
+  <link rel="stylesheet" href="cart.css" />
+</head>
+<body>
+
+  <!-- ───────────────────────────────────────── HEADER ── -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a href="../discover/discover.html" class="brand-logo" id="logo-link">
+        <div class="logo-badge">Q</div>
+        <span class="logo-name">QuickDash</span>
+      </a>
+
+      <!-- Page Title (Middle section) -->
+      <div class="header-shop-title-container" id="header-shop-title-container">
+        <h2 class="header-shop-name" style="text-align: center;" id="header-cart-title">Your Cart 🛒</h2>
+      </div>
+
+      <!-- Auth / Profile Button -->
+      <div class="header-auth" id="header-auth">
+        <!-- Filled by JS based on login state -->
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ───────────────────────────────── LOCATION BAR ── -->
+  <div class="location-bar">
+    <div class="location-bar-inner">
+      <div class="location-display">
+        <span class="loc-pin">📍</span>
+        <span id="location-label">Market Center, New Delhi</span>
+      </div>
+      <span class="delivery-tag">⚡ Direct Store Delivery</span>
+    </div>
+  </div>
+
+  <!-- ───────────────────────────────────── MAIN CONTENT ── -->
+  <main class="cart-page-container">
+    
+    <!-- Active Cart View (Contains Items and Summary) -->
+    <div class="cart-active-layout" id="cart-active-layout">
+      
+      <!-- Left Column: Items List -->
+      <div class="cart-items-section">
+        <div class="cart-section-header">
+          <h1 class="cart-title">Order Review</h1>
+          <span class="cart-store-badge" id="cart-store-badge">Loading Store...</span>
+        </div>
+        
+        <!-- Cart Items Container -->
+        <div class="cart-items-list" id="cart-items-list">
+          <!-- Injected dynamically by JS -->
+        </div>
+
+        <!-- Extra details/Store promise -->
+        <div class="cart-promise-card">
+          <div class="promise-icon">🛡️</div>
+          <div class="promise-content">
+            <h4>QuickDash Direct Trust Guarantee</h4>
+            <p>100% genuine fresh products sourced directly from your selected local neighborhood store. In case of issues, instant returns are available at delivery time.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Bill Details and Payment Summary -->
+      <div class="cart-summary-section">
+        <div class="summary-sticky-wrapper">
+          <h2 class="summary-title">Bill Details</h2>
+          
+          <div class="summary-bill-card">
+            <div class="bill-row">
+              <span class="bill-label">Item Total (Raw Total)</span>
+              <span class="bill-value" id="bill-raw-total">₹0</span>
+            </div>
+            <div class="bill-row">
+              <span class="bill-label">GST (5%)</span>
+              <span class="bill-value" id="bill-gst">₹0</span>
+            </div>
+            <div class="bill-row">
+              <span class="bill-label">Delivery Partner Fee</span>
+              <span class="bill-value positive" id="bill-delivery-fee">₹25</span>
+            </div>
+            <div class="bill-row" id="bill-additional-delivery-row" style="display: none;">
+              <span class="bill-label">Distance Fee (&gt;3 km)</span>
+              <span class="bill-value positive" id="bill-additional-delivery">₹0</span>
+            </div>
+            <div class="bill-row">
+              <span class="bill-label">Platform Handling Charge</span>
+              <span class="bill-value">₹5</span>
+            </div>
+            
+            <div class="bill-divider"></div>
+            
+            <div class="bill-row grand-total">
+              <span class="bill-label">To Pay</span>
+              <span class="bill-value" id="bill-grand-total">₹0</span>
+            </div>
+          </div>
+
+          <!-- Checkout CTA Buttons -->
+          <button class="btn-checkout-primary" id="btn-proceed-pay" onclick="handleProceedToPay()">
+            <span>Proceed to Pay</span>
+            <span class="btn-arrow">→</span>
+          </button>
+          
+          <button class="btn-checkout-secondary" onclick="window.history.back()">
+            ← Add More Items from Store
+          </button>
+
+          <!-- Savings/Coupon Info -->
+          <div class="coupon-teaser-box">
+            <span class="coupon-icon">🏷️</span>
+            <div class="coupon-text">
+              <strong>Save more with custom merchant coupons!</strong>
+              <p>Sign up or register to view and apply exclusive store offers.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Empty Cart View (Hidden by default, displayed when cart has no items) -->
+    <div class="cart-empty-view" id="cart-empty-view" style="display: none;">
+      <div class="empty-icon-wrapper">
+        <span class="empty-emoji">🛒</span>
+        <div class="empty-sparkle sparkle-1">✨</div>
+        <div class="empty-sparkle sparkle-2">✨</div>
+      </div>
+      <h2 class="empty-title">Your Cart is Empty</h2>
+      <p class="empty-subtitle">You haven't added any products to your shopping cart yet. Sift through nearby stores to find excellent local products!</p>
+      <a href="../discover/discover.html" class="btn-empty-shop-now">Explore Local Shops</a>
+    </div>
+
+  </main>
+
+  <!-- ───────────────────────────────────────── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <!-- Brand Column -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-badge sm">Q</div>
+          <span class="logo-name">QuickDash</span>
+        </div>
+        <p class="footer-tagline">Empowering local shops. Connecting communities. One delivery at a time.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" aria-label="Instagram">📸</a>
+          <a href="#" class="social-btn" aria-label="Twitter">🐦</a>
+          <a href="#" class="social-btn" aria-label="Facebook">👥</a>
+          <a href="#" class="social-btn" aria-label="WhatsApp">💬</a>
+        </div>
+      </div>
+
+      <!-- Links Columns -->
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Mission</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Track Order</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Merchant Agreement</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Join Us / CTA Column -->
+      <div class="footer-cta-col">
+        <div class="footer-cta-card">
+          <div class="cta-icon">🛵</div>
+          <h4>Become a Delivery Partner</h4>
+          <p>Earn on your own schedule. Join hundreds of delivery partners in your city.</p>
+          <a href="javascript:void(0)" class="btn-join-us" id="btn-join-delivery" onclick="openPartnerRegistration()">Join Us →</a>
+        </div>
+        <div class="footer-cta-card" style="margin-top: 1rem;">
+          <div class="cta-icon">🏪</div>
+          <h4>List Your Shop</h4>
+          <p>Already a merchant? Register your shop on QuickDash and grow your business.</p>
+          <a href="../signup/signup.html" class="btn-join-us outline">Register Shop →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <span>© 2025 QuickDash. All rights reserved. Made with 💚 for local communities.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ──────────────────────────────── PROFILE DRAWER ── -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeProfileDrawer()"></div>
+  <div class="profile-drawer" id="profile-drawer">
+    <div class="drawer-header">
+      <h3>My Profile</h3>
+      <button class="drawer-close" onclick="closeProfileDrawer()">✕</button>
+    </div>
+    <div class="drawer-body" id="drawer-body">
+      <!-- Injected dynamically by JS -->
+    </div>
+  </div>
+
+  <script src="../shared/database.js"></script>
+  <script src="../shared/partner-register.js"></script>
+  <script src="cart.js"></script>
+</body>
+</html>

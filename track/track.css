@@ -1,0 +1,597 @@
+/* ── Room 7: Track My Order Stylesheet ───────────────────────────── */
+
+/* ── Page Layout ─────────────────────────────────────────── */
+.track-page-container {
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
+
+.track-active-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+/* ── Left Panel ──────────────────────────────────────────── */
+.track-left-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Order Status Card ───────────────────────────────────── */
+.order-status-card {
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.order-status-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--gray-100);
+  padding-bottom: 1rem;
+}
+
+.status-card-title {
+  font-family: var(--font-h);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--g900);
+  letter-spacing: -0.3px;
+}
+
+.order-id-badge {
+  background: var(--g50);
+  border: 1px solid var(--g200);
+  color: var(--g800);
+  font-size: 0.78rem;
+  font-weight: 700;
+  font-family: var(--font-h);
+  padding: 0.3rem 0.85rem;
+  border-radius: var(--radius-full);
+}
+
+/* ── Status Stepper ──────────────────────────────────────── */
+.status-stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.step-item {
+  display: flex;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.step-dot-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.step-dot {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--gray-200);
+  border: 3px solid var(--gray-200);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
+}
+
+.step-line {
+  width: 3px;
+  flex: 1;
+  min-height: 40px;
+  background: var(--gray-200);
+  margin: 4px 0;
+  transition: background 0.6s ease;
+  border-radius: 2px;
+}
+
+/* Active step state */
+.step-item.active .step-dot {
+  background: var(--g500);
+  border-color: var(--g500);
+  box-shadow: 0 0 0 5px rgba(82, 183, 136, 0.2);
+  animation: dotPulse 1.5s infinite;
+}
+
+/* Completed step state */
+.step-item.completed .step-dot {
+  background: var(--g800);
+  border-color: var(--g800);
+  box-shadow: none;
+  animation: none;
+}
+
+.step-item.completed .step-dot::after {
+  content: '✓';
+  color: var(--white);
+  font-size: 0.75rem;
+  font-weight: 900;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.step-item.completed .step-line {
+  background: var(--g500);
+}
+
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(82, 183, 136, 0.2); }
+  50%       { box-shadow: 0 0 0 8px rgba(82, 183, 136, 0.1); }
+}
+
+/* Step content text */
+.step-content {
+  padding-bottom: 1.75rem;
+  padding-top: 0.1rem;
+}
+
+.step-title {
+  font-family: var(--font-h);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gray-400);
+  transition: color 0.4s ease;
+  margin-bottom: 0.2rem;
+}
+
+.step-item.active .step-title,
+.step-item.completed .step-title {
+  color: var(--g900);
+}
+
+.step-desc {
+  font-size: 0.78rem;
+  color: var(--gray-400);
+  line-height: 1.5;
+  font-weight: 500;
+  max-width: 300px;
+  transition: color 0.4s ease;
+}
+
+.step-item.active .step-desc,
+.step-item.completed .step-desc {
+  color: var(--gray-600);
+}
+
+.step-time {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--g600);
+  font-weight: 700;
+  margin-top: 0.35rem;
+  font-family: var(--font-h);
+}
+
+/* ── Delivery Partner Meta Card ──────────────────────────── */
+.delivery-meta-card {
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-xs);
+}
+
+.delivery-person-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.delivery-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--g100), var(--g200));
+  border: 2px solid var(--g300);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+
+.delivery-info {
+  flex: 1;
+}
+
+.delivery-info h4 {
+  font-family: var(--font-h);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--g900);
+}
+
+.delivery-info p {
+  font-size: 0.78rem;
+  color: var(--gray-400);
+  margin-top: 0.15rem;
+  font-weight: 500;
+}
+
+.delivery-vehicle {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--g600);
+  font-weight: 700;
+  margin-top: 0.2rem;
+}
+
+.btn-call-partner {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--g50);
+  border: 1.5px solid var(--g200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.btn-call-partner:hover {
+  background: var(--g100);
+  border-color: var(--g500);
+  transform: scale(1.08);
+}
+
+.delivery-divider {
+  border-top: 1px solid var(--gray-100);
+  margin: 1rem 0;
+}
+
+.store-row {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.store-icon-circle {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-xs);
+  background: var(--g50);
+  border: 1.5px solid var(--g200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.store-row h4 {
+  font-family: var(--font-h);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--g900);
+}
+
+.store-row p {
+  font-size: 0.78rem;
+  color: var(--gray-400);
+  margin-top: 0.1rem;
+  font-weight: 500;
+}
+
+/* ── Invoice Breakdown Card ──────────────────────────────── */
+.track-invoice-card {
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-xs);
+}
+
+.invoice-title {
+  font-family: var(--font-h);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--g900);
+  margin-bottom: 1.15rem;
+  border-bottom: 1px solid var(--gray-100);
+  padding-bottom: 0.75rem;
+}
+
+.invoice-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.invoice-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  font-weight: 500;
+}
+
+.invoice-row .inv-label { flex: 1; }
+
+.invoice-row .inv-value {
+  font-family: var(--font-h);
+  font-weight: 700;
+  color: var(--g900);
+}
+
+.invoice-divider {
+  border-top: 1px dashed var(--gray-200);
+  margin: 0.2rem 0;
+}
+
+.invoice-row.total-row {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--g900);
+  border-top: 2px solid var(--gray-100);
+  padding-top: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+.invoice-row.total-row .inv-value {
+  font-size: 1.1rem;
+  color: var(--g900);
+}
+
+/* ── Delivery Address Card ───────────────────────────────── */
+.track-address-card {
+  background: var(--g50);
+  border: 1px dashed var(--g300);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.address-card-icon {
+  font-size: 1.75rem;
+  filter: drop-shadow(0 2px 4px rgba(27,67,50,.1));
+}
+
+.track-address-card h4 {
+  font-family: var(--font-h);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--g900);
+  margin-bottom: 0.3rem;
+}
+
+.track-address-card p {
+  font-size: 0.82rem;
+  color: var(--gray-600);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.recipient-label {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--g800);
+  background: var(--g100);
+  padding: 0.15rem 0.6rem;
+  border-radius: var(--radius-full);
+}
+
+/* ── Right Panel: Map ────────────────────────────────────── */
+.track-right-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: sticky;
+  top: calc(var(--header-h) + 1rem);
+}
+
+.track-map-wrapper {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  border: 1.5px solid var(--gray-200);
+}
+
+#track-map {
+  height: 440px;
+  width: 100%;
+}
+
+.map-status-pill {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 500;
+  background: var(--white);
+  border: 1.5px solid var(--g200);
+  border-radius: var(--radius-full);
+  padding: 0.4rem 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-h);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--g900);
+  box-shadow: var(--shadow-sm);
+  white-space: nowrap;
+}
+
+.pulse-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--g500);
+  animation: pulseGlow 1.4s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 0 0 rgba(82,183,136,0.5); }
+  50%       { opacity: 0.7; transform: scale(1.15); box-shadow: 0 0 0 6px rgba(82,183,136,0); }
+}
+
+/* ── Ratings Card ────────────────────────────────────────── */
+.ratings-card {
+  background: var(--white);
+  border: 1.5px solid var(--g200);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  box-shadow: var(--shadow-sm);
+  animation: slideInUp 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ratings-title {
+  font-family: var(--font-h);
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--g900);
+  margin-bottom: 0.35rem;
+}
+
+.ratings-subtitle {
+  font-size: 0.82rem;
+  color: var(--gray-400);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+.rating-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.1rem;
+}
+
+.rating-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--g900);
+}
+
+.star-group {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.star-btn {
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: transform 0.18s ease, filter 0.18s ease;
+  border: none;
+  background: none;
+  padding: 0;
+  line-height: 1;
+  filter: grayscale(1) opacity(0.35);
+  user-select: none;
+}
+
+.star-btn:hover,
+.star-btn.selected {
+  filter: grayscale(0) opacity(1);
+  transform: scale(1.2);
+}
+
+.review-textarea {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-b);
+  font-size: 0.85rem;
+  resize: vertical;
+  margin-bottom: 1.25rem;
+  transition: var(--transition);
+  color: var(--g900);
+}
+
+.review-textarea:focus {
+  border-color: var(--g500);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(82,183,136,0.15);
+}
+
+.review-textarea::placeholder { color: var(--gray-400); }
+
+.btn-submit-rating {
+  background: linear-gradient(135deg, var(--g600), var(--g900));
+  color: var(--white);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-h);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  transition: var(--transition);
+  box-shadow: 0 4px 16px rgba(27,67,50,.25);
+}
+
+.btn-submit-rating:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(27,67,50,.35);
+}
+
+/* ── Custom Leaflet marker styles ────────────────────────── */
+.custom-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.25));
+  transition: left 0.5s ease, top 0.5s ease;
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .track-active-layout {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .track-active-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .track-right-panel {
+    position: static;
+    order: -1; /* Map appears first on mobile */
+  }
+
+  #track-map { height: 320px; }
+}
+
+@media (max-width: 480px) {
+  .track-page-container { padding-top: 1.25rem; }
+  .status-card-title { font-size: 1.05rem; }
+  #track-map { height: 260px; }
+  .delivery-person-row { flex-wrap: wrap; }
+}

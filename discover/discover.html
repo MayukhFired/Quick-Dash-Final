@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickDash — Discover Local Shops Near You</title>
+  <meta name="description" content="Discover fresh groceries, snacks, dairy, personal care and more from local shops near you. QuickDash — Shop Local, Live Better." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="discover.css" />
+</head>
+<body>
+
+  <!-- ───────────────────────────────────────── HEADER ── -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a href="discover.html" class="brand-logo" id="logo-link">
+        <div class="logo-badge">Q</div>
+        <span class="logo-name">QuickDash</span>
+      </a>
+
+      <!-- Search Bar -->
+      <div class="search-wrapper" id="search-wrapper">
+        <div class="search-bar" id="search-bar">
+          <span class="search-icon">🔍</span>
+          <input
+            type="search"
+            id="search-input"
+            class="search-input"
+            placeholder='Search "milk", "chips", "pharmacy"…'
+            autocomplete="off"
+          />
+          <button class="search-clear" id="search-clear" style="display:none;" onclick="clearSearch()">✕</button>
+        </div>
+        <!-- Search Dropdown Suggestions -->
+        <div class="search-dropdown" id="search-dropdown"></div>
+      </div>
+
+      <!-- Quick-Access Header Cart Button -->
+      <a href="../cart/cart.html" class="btn-header-cart" id="header-cart-btn" aria-label="Go to cart">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-badge-count" id="header-cart-count">0</span>
+      </a>
+
+      <!-- Auth / Profile Button -->
+      <div class="header-auth" id="header-auth">
+        <!-- Filled by JS based on login state -->
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ───────────────────────────────── LOCATION BAR ── -->
+  <div class="location-bar">
+    <div class="location-bar-inner">
+      <button class="location-btn" id="location-btn" onclick="detectLocation()">
+        <span class="loc-pin">📍</span>
+        <span id="location-label">Detecting your location…</span>
+        <span class="loc-change">Change</span>
+      </button>
+      <span class="delivery-tag">⚡ Delivery in 10–30 mins</span>
+    </div>
+  </div>
+
+  <!-- ───────────────────────────────────── MAIN PAGE ── -->
+  <main>
+
+    <!-- Hero Banner -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <div class="hero-tag">🏪 Supporting Local Businesses</div>
+        <h1 class="hero-headline">Shop Local.<br />Delivered Fast.</h1>
+        <p class="hero-sub">Fresh groceries, snacks, dairy & more — from the shops in your neighbourhood, delivered to your door.</p>
+        <button class="hero-cta" onclick="window.location.href='../shops/shops.html'">
+          🔍 Find Shops Near You
+        </button>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-float-card card-1">🥦<span>Organic Veggies</span></div>
+        <div class="hero-float-card card-2">🛒<span>1,200+ Shops</span></div>
+        <div class="hero-float-card card-3">⚡<span>10 min delivery</span></div>
+        <div class="hero-bg-circle"></div>
+      </div>
+    </section>
+
+    <!-- ─────────────── CATEGORIES ── -->
+    <section class="categories-section" id="categories">
+      <div class="section-header">
+        <h2 class="section-title">Shop by Category</h2>
+        <p class="section-sub">Everything your household needs, from local stores near you</p>
+      </div>
+
+      <div class="categories-grid" id="categories-grid">
+        <!-- Cards are injected by JS -->
+      </div>
+    </section>
+
+    <!-- ─────────────── PRODUCTS SHOWCASE ── -->
+    <section class="products-showcase-section" id="products-showcase">
+      <div class="section-header">
+        <h2 class="section-title">Trending Near You</h2>
+        <p class="section-sub">Directly from neighborhood shops. Tap a product to open the store's menu.</p>
+      </div>
+
+      <div class="discover-products-grid" id="discover-products-grid">
+        <!-- Showcase cards injected dynamically by JS -->
+      </div>
+    </section>
+    <section class="why-section">
+      <div class="section-header">
+        <h2 class="section-title">Why QuickDash?</h2>
+        <p class="section-sub">We're built differently — for your neighbourhood, not a warehouse</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">🏪</div>
+          <h3>Real Local Shops</h3>
+          <p>Every order supports an actual shop in your area — not a dark store or mega-warehouse.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">⚡</div>
+          <h3>Lightning Fast</h3>
+          <p>Get deliveries in as little as 10 minutes from shops right in your neighbourhood.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">💚</div>
+          <h3>Fresh Guarantee</h3>
+          <p>Local shops source fresh daily. No cold-chain warehouses, no week-old produce.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon">💰</div>
+          <h3>Fair Prices</h3>
+          <p>Shop owners set their own prices. No inflated markups or hidden platform fees for customers.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ───────────────────────────────────────── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <!-- Brand Column -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-badge sm">Q</div>
+          <span class="logo-name">QuickDash</span>
+        </div>
+        <p class="footer-tagline">Empowering local shops. Connecting communities. One delivery at a time.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" aria-label="Instagram">📸</a>
+          <a href="#" class="social-btn" aria-label="Twitter">🐦</a>
+          <a href="#" class="social-btn" aria-label="Facebook">👥</a>
+          <a href="#" class="social-btn" aria-label="WhatsApp">💬</a>
+        </div>
+      </div>
+
+      <!-- Links Columns -->
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Mission</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Track Order</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="terms.html">Terms & Conditions</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Merchant Agreement</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Join Us / CTA Column -->
+      <div class="footer-cta-col">
+        <div class="footer-cta-card">
+          <div class="cta-icon">🛵</div>
+          <h4>Become a Delivery Partner</h4>
+          <p>Earn on your own schedule. Join hundreds of delivery partners in your city.</p>
+          <a href="javascript:void(0)" class="btn-join-us" id="btn-join-delivery" onclick="openPartnerRegistration()">Join Us →</a>
+        </div>
+        <div class="footer-cta-card" style="margin-top: 1rem;">
+          <div class="cta-icon">🏪</div>
+          <h4>List Your Shop</h4>
+          <p>Already a merchant? Register your shop on QuickDash and grow your business.</p>
+          <a href="../signup/signup.html" class="btn-join-us outline">Register Shop →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <span>© 2025 QuickDash. All rights reserved. Made with 💚 for local communities.</span>
+      <div class="footer-bottom-links">
+        <a href="terms.html">Terms</a>
+        <a href="privacy.html">Privacy</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Profile Drawer (slide-in) -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeProfileDrawer()"></div>
+  <div class="profile-drawer" id="profile-drawer">
+    <div class="drawer-header">
+      <h3>My Profile</h3>
+      <button class="drawer-close" onclick="closeProfileDrawer()">✕</button>
+    </div>
+    <div class="drawer-body" id="drawer-body">
+      <!-- Filled by JS -->
+    </div>
+  </div>
+
+  <!-- Sleek Floating Bottom Navigation Dock -->
+  <div class="floating-nav-dock">
+    <a href="../discover/discover.html" class="nav-dock-item active" id="nav-dock-discover">
+      <span class="nav-dock-icon">🏠</span>
+      <span class="nav-dock-label">Discover</span>
+    </a>
+    <a href="../shops/shops.html" class="nav-dock-item" id="nav-dock-shops">
+      <span class="nav-dock-icon">🏪</span>
+      <span class="nav-dock-label">Shops</span>
+    </a>
+    <a href="../orders/orders.html" class="nav-dock-item" id="nav-dock-orders">
+      <span class="nav-dock-icon">📦</span>
+      <span class="nav-dock-label">Orders</span>
+    </a>
+  </div>
+
+  <script src="../shared/database.js"></script>
+  <script src="../shared/partner-register.js"></script>
+  <script src="../shared/integrations.config.js"></script>
+  <script src="../shared/integrations.js"></script>
+  <script src="discover.js"></script>
+</body>
+</html>

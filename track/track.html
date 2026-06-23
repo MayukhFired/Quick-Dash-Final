@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Track My Order — QuickDash</title>
+  <meta name="description" content="Live order tracking and delivery partner updates on QuickDash." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Leaflet.js Map CDN CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+
+  <link rel="stylesheet" href="../discover/discover.css" />
+  <link rel="stylesheet" href="track.css" />
+</head>
+<body>
+
+  <!-- ───────────────────────────────────────── HEADER ── -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="../discover/discover.html" class="brand-logo" id="logo-link">
+        <div class="logo-badge">Q</div>
+        <span class="logo-name">QuickDash</span>
+      </a>
+
+      <div class="header-shop-title-container">
+        <h2 class="header-shop-name" style="text-align:center;">Track My Order 🛵</h2>
+      </div>
+
+      <div class="header-auth" id="header-auth"></div>
+    </div>
+  </header>
+
+  <!-- ───────────────────────────────── LOCATION BAR ── -->
+  <div class="location-bar">
+    <div class="location-bar-inner">
+      <div class="location-display">
+        <span class="loc-pin">📍</span>
+        <span id="location-label">Market Center, New Delhi</span>
+      </div>
+      <span class="delivery-tag" id="eta-tag">⚡ Estimating arrival...</span>
+    </div>
+  </div>
+
+  <!-- ───────────────────────────────────── MAIN CONTENT ── -->
+  <main class="track-page-container">
+
+    <div class="track-active-layout">
+
+      <!-- Left Panel: Stepper + Invoice + Store Details -->
+      <div class="track-left-panel">
+
+        <!-- Order Status Card -->
+        <div class="order-status-card">
+          <div class="order-status-card-header">
+            <h2 class="status-card-title">Order Status</h2>
+            <span class="order-id-badge">Order #QD-<span id="order-id-suffix">----</span></span>
+          </div>
+
+          <!-- Progress Stepper -->
+          <div class="status-stepper" id="status-stepper">
+
+            <!-- Stage 1 -->
+            <div class="step-item" id="step-1">
+              <div class="step-dot-wrapper">
+                <div class="step-dot"></div>
+                <div class="step-line"></div>
+              </div>
+              <div class="step-content">
+                <h4 class="step-title">Store Accepted Your Order 🏪</h4>
+                <p class="step-desc">The store owner has received and confirmed your order request.</p>
+                <span class="step-time" id="step-1-time"></span>
+              </div>
+            </div>
+
+            <!-- Stage 2 -->
+            <div class="step-item" id="step-2">
+              <div class="step-dot-wrapper">
+                <div class="step-dot"></div>
+                <div class="step-line"></div>
+              </div>
+              <div class="step-content">
+                <h4 class="step-title">Delivery Partner Picked Up 🛵</h4>
+                <p class="step-desc">Your delivery partner has collected the package and is heading your way!</p>
+                <span class="step-time" id="step-2-time"></span>
+              </div>
+            </div>
+
+            <!-- Stage 3 -->
+            <div class="step-item" id="step-3">
+              <div class="step-dot-wrapper">
+                <div class="step-dot"></div>
+              </div>
+              <div class="step-content">
+                <h4 class="step-title">Delivery Complete! 🎉</h4>
+                <p class="step-desc">Your order has been successfully delivered. Enjoy!</p>
+                <span class="step-time" id="step-3-time"></span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Store & Delivery Partner Info -->
+        <div class="delivery-meta-card">
+          <div class="delivery-person-row">
+            <div class="delivery-avatar">🛵</div>
+            <div class="delivery-info">
+              <h4>Ravi Kumar</h4>
+              <p>QuickDash Delivery Partner · ⭐ 4.8</p>
+              <span class="delivery-vehicle">Honda Activa · DL 7S 4821</span>
+            </div>
+            <a class="btn-call-partner" href="tel:+919876543210" aria-label="Call delivery partner">📞</a>
+          </div>
+
+          <div class="delivery-divider"></div>
+
+          <div class="store-row">
+            <div class="store-icon-circle" id="store-icon-circle">🏪</div>
+            <div>
+              <h4 id="track-store-name">Loading store...</h4>
+              <p id="track-store-address">Getting store details...</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Order Invoice Breakdown -->
+        <div class="track-invoice-card">
+          <h3 class="invoice-title">Order Invoice</h3>
+          <div class="invoice-rows" id="invoice-rows">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+
+        <!-- Delivery Address Card -->
+        <div class="track-address-card">
+          <div class="address-card-icon">📦</div>
+          <div>
+            <h4>Delivery Address</h4>
+            <p id="track-delivery-address">Loading...</p>
+            <span class="recipient-label" id="track-recipient-label"></span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Panel: Live Tracking Map -->
+      <div class="track-right-panel">
+
+        <!-- Live Map Container -->
+        <div class="track-map-wrapper">
+          <div class="map-status-pill" id="map-status-pill">
+            <span class="pulse-dot"></span>
+            <span id="map-status-text">Locating partner...</span>
+          </div>
+          <div id="track-map"></div>
+        </div>
+
+        <!-- Ratings Card (shown after delivery) -->
+        <div class="ratings-card" id="ratings-card" style="display:none;">
+          <h3 class="ratings-title">Rate Your Experience ⭐</h3>
+          <p class="ratings-subtitle">Your feedback helps us improve QuickDash for everyone.</p>
+
+          <div class="rating-row">
+            <span class="rating-label">🏪 Store Quality</span>
+            <div class="star-group" id="stars-store" data-key="store"></div>
+          </div>
+
+          <div class="rating-row">
+            <span class="rating-label">🛵 Delivery Partner</span>
+            <div class="star-group" id="stars-partner" data-key="partner"></div>
+          </div>
+
+          <div class="rating-row">
+            <span class="rating-label">📱 QuickDash App</span>
+            <div class="star-group" id="stars-app" data-key="app"></div>
+          </div>
+
+          <textarea id="review-text" class="review-textarea" placeholder="Write a brief review (optional)..." rows="3"></textarea>
+
+          <button class="btn-submit-rating" id="btn-submit-rating" onclick="submitRatings()">
+            Submit Feedback & Finish
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- ───────────────────────────────────────── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-badge sm">Q</div>
+          <span class="logo-name">QuickDash</span>
+        </div>
+        <p class="footer-tagline">Empowering local shops. Connecting communities. One delivery at a time.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">📸</a>
+          <a href="#" class="social-btn">🐦</a>
+          <a href="#" class="social-btn">👥</a>
+          <a href="#" class="social-btn">💬</a>
+        </div>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Mission</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Track Order</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-cta-col">
+        <div class="footer-cta-card">
+          <div class="cta-icon">🛵</div>
+          <h4>Become a Delivery Partner</h4>
+          <p>Earn on your own schedule. Join hundreds of delivery partners in your city.</p>
+          <a href="javascript:void(0)" class="btn-join-us" id="btn-join-delivery" onclick="openPartnerRegistration()">Join Us →</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 QuickDash. All rights reserved. Made with 💚 for local communities.</span>
+    </div>
+  </footer>
+
+  <!-- ──────────────────────────────── PROFILE DRAWER ── -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeProfileDrawer()"></div>
+  <div class="profile-drawer" id="profile-drawer">
+    <div class="drawer-header">
+      <h3>My Profile</h3>
+      <button class="drawer-close" onclick="closeProfileDrawer()">✕</button>
+    </div>
+    <div class="drawer-body" id="drawer-body"></div>
+  </div>
+
+  <!-- Leaflet.js Mapping Library -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script src="../shared/database.js"></script>
+  <script src="../shared/partner-register.js"></script>
+  <script src="track.js"></script>
+</body>
+</html>

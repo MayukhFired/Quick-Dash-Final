@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickDash — Buy Local Products</title>
+  <meta name="description" content="Order local items directly from your favorite neighborhood shop on QuickDash." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../discover/discover.css" />
+  <link rel="stylesheet" href="shop.css" />
+</head>
+<body>
+
+  <!-- ───────────────────────────────────────── HEADER ── -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a href="../discover/discover.html" class="brand-logo" id="logo-link">
+        <div class="logo-badge">Q</div>
+        <span class="logo-name">QuickDash</span>
+      </a>
+
+      <!-- Shop Title Placeholder (Replaces search box in center) -->
+      <div class="header-shop-title-container" id="header-shop-title-container">
+        <h2 class="header-shop-name" id="header-shop-name">Loading Store...</h2>
+        <span class="header-shop-rating" id="header-shop-rating">⭐ 0.0</span>
+      </div>
+
+      <!-- Auth / Profile Button -->
+      <div class="header-auth" id="header-auth">
+        <!-- Filled by JS based on login state -->
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ───────────────────────────────── LOCATION BAR ── -->
+  <div class="location-bar">
+    <div class="location-bar-inner">
+      <div class="location-display">
+        <span class="loc-pin">📍</span>
+        <span id="location-label">Market Center, New Delhi</span>
+      </div>
+      <span class="delivery-tag">⚡ Delivery in 10–30 mins</span>
+    </div>
+  </div>
+
+  <!-- ───────────────────────────────────── MAIN CONTENT ── -->
+  <main class="shop-details-container">
+    
+    <!-- Shop Info Hero Card -->
+    <div class="shop-info-hero" id="shop-info-hero">
+      <!-- Generated Dynamically by JS -->
+    </div>
+
+    <!-- ──────────────────────── SORTING PANEL ── -->
+    <div class="sorting-controls-wrapper">
+      <span class="sort-label">🔍 Sort Products:</span>
+      <div class="sorting-options">
+        <button class="sort-btn active" data-sort="default" onclick="handleSortChange('default', this)">Most Ordered</button>
+        <button class="sort-btn" data-sort="price-low" onclick="handleSortChange('price-low', this)">Price: Low to High</button>
+        <button class="sort-btn" data-sort="price-high" onclick="handleSortChange('price-high', this)">Price: High to Low</button>
+        <button class="sort-btn" data-sort="top-rated" onclick="handleSortChange('top-rated', this)">Top Rated</button>
+      </div>
+    </div>
+
+    <!-- ──────────────────────── PRODUCTS CATEGORIZED VIEW ── -->
+    <div class="shop-catalog-sections" id="shop-catalog-sections">
+      <!-- Dynamic Products Grid Grouped by Category Divisions -->
+    </div>
+
+  </main>
+
+  <!-- ───────────────────────────────────────── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <!-- Brand Column -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-badge sm">Q</div>
+          <span class="logo-name">QuickDash</span>
+        </div>
+        <p class="footer-tagline">Empowering local shops. Connecting communities. One delivery at a time.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" aria-label="Instagram">📸</a>
+          <a href="#" class="social-btn" aria-label="Twitter">🐦</a>
+          <a href="#" class="social-btn" aria-label="Facebook">👥</a>
+          <a href="#" class="social-btn" aria-label="WhatsApp">💬</a>
+        </div>
+      </div>
+
+      <!-- Links Columns -->
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Mission</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Track Order</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Merchant Agreement</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Join Us / CTA Column -->
+      <div class="footer-cta-col">
+        <div class="footer-cta-card">
+          <div class="cta-icon">🛵</div>
+          <h4>Become a Delivery Partner</h4>
+          <p>Earn on your own schedule. Join hundreds of delivery partners in your city.</p>
+          <a href="javascript:void(0)" class="btn-join-us" id="btn-join-delivery" onclick="openPartnerRegistration()">Join Us →</a>
+        </div>
+        <div class="footer-cta-card" style="margin-top: 1rem;">
+          <div class="cta-icon">🏪</div>
+          <h4>List Your Shop</h4>
+          <p>Already a merchant? Register your shop on QuickDash and grow your business.</p>
+          <a href="../signup/signup.html" class="btn-join-us outline">Register Shop →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <span>© 2025 QuickDash. All rights reserved. Made with 💚 for local communities.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ──────────────────────────────── PROFILE DRAWER ── -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeProfileDrawer()"></div>
+  <div class="profile-drawer" id="profile-drawer">
+    <div class="drawer-header">
+      <h3>My Profile</h3>
+      <button class="drawer-close" onclick="closeProfileDrawer()">✕</button>
+    </div>
+    <div class="drawer-body" id="drawer-body">
+      <!-- Injected dynamically by JS -->
+    </div>
+  </div>
+
+  <!-- ──────────────────────── FLOATING SHOPPING CART OVERLAY ── -->
+  <div class="floating-cart-bar" id="floating-cart-bar">
+    <div class="cart-bar-inner">
+      <div class="cart-summary-info">
+        <span class="cart-bar-icon">🛒</span>
+        <div class="cart-meta-text">
+          <span class="cart-bar-qty" id="cart-bar-qty">0 items</span>
+          <span class="cart-bar-total" id="cart-bar-total">₹0</span>
+        </div>
+      </div>
+      <button class="btn-cart-checkout" onclick="handleCheckout()">Checkout Order →</button>
+    </div>
+  </div>
+
+  <!-- ──────────────────────── SINGLE-SHOP WARNING ALERT MODAL ── -->
+  <div class="modal-overlay" id="warning-modal">
+    <div class="modal-card">
+      <div class="modal-icon">⚠️</div>
+      <h3 class="modal-title">Replace items in cart?</h3>
+      <p class="modal-body-text">
+        Your cart already contains items from <strong id="warning-prev-shop">another store</strong>.
+        QuickDash only allows ordering from <strong>one shop at a time</strong>.
+      </p>
+      <div class="modal-actions">
+        <button class="btn-modal-cancel" onclick="closeWarningModal()">Cancel</button>
+        <button class="btn-modal-confirm" onclick="confirmCartClearAndSwap()">Clear & Add Item</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../shared/database.js"></script>
+  <script src="../shared/partner-register.js"></script>
+  <script src="shop.js"></script>
+</body>
+</html>

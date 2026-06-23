@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Orders — QuickDash</title>
+  <meta name="description" content="View and manage your past QuickDash orders, download invoices, and reorder from local shops." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="../discover/discover.css" />
+  <link rel="stylesheet" href="orders.css" />
+</head>
+<body>
+
+  <!-- ───────────────────────────────────────── HEADER ── -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+      <a href="../discover/discover.html" class="brand-logo" id="logo-link">
+        <div class="logo-badge">Q</div>
+        <span class="logo-name">QuickDash</span>
+      </a>
+
+      <div class="header-shop-title-container">
+        <h2 class="header-shop-name" style="text-align:center;">Order History 📦</h2>
+      </div>
+
+      <div class="header-auth" id="header-auth"></div>
+    </div>
+  </header>
+
+  <!-- ───────────────────────────────────── MAIN CONTENT ── -->
+  <main class="orders-page-container">
+    <div class="orders-layout">
+      
+      <!-- List Area -->
+      <div class="orders-list-section">
+        <div class="section-header">
+          <h3 class="section-title">Past Orders</h3>
+          <span class="orders-count-badge" id="orders-count">0 Orders</span>
+        </div>
+
+        <!-- Orders Cards Container -->
+        <div class="orders-cards-container" id="orders-cards-container">
+          <!-- Dynamically populated or empty state -->
+        </div>
+      </div>
+
+      <!-- Detail Panel (Fixed on desktop, modal on mobile) -->
+      <div class="order-detail-section" id="order-detail-section">
+        <div class="detail-placeholder" id="detail-placeholder">
+          <div class="placeholder-icon">📦</div>
+          <h4>Select an order to view details</h4>
+          <p>Click on any order card on the left to see the receipt breakdown, delivery partner, address details, reorder, and download the PDF invoice.</p>
+        </div>
+
+        <div class="detail-card" id="detail-card" style="display: none;">
+          <!-- Active detail injected here -->
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ───────────────────────────────────────── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-badge sm">Q</div>
+          <span class="logo-name">QuickDash</span>
+        </div>
+        <p class="footer-tagline">Empowering local shops. Connecting communities. One delivery at a time.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn">📸</a>
+          <a href="#" class="social-btn">🐦</a>
+          <a href="#" class="social-btn">👥</a>
+          <a href="#" class="social-btn">💬</a>
+        </div>
+      </div>
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Mission</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Track Order</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 QuickDash. All rights reserved. Made with 💚 for local communities.</span>
+    </div>
+  </footer>
+
+  <!-- ──────────────────────────────── PROFILE DRAWER ── -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeProfileDrawer()"></div>
+  <div class="profile-drawer" id="profile-drawer">
+    <div class="drawer-header">
+      <h3>My Profile</h3>
+      <button class="drawer-close" onclick="closeProfileDrawer()">✕</button>
+    </div>
+    <div class="drawer-body" id="drawer-body"></div>
+  </div>
+
+  <!-- Sleek Floating Bottom Navigation Dock -->
+  <div class="floating-nav-dock">
+    <a href="../discover/discover.html" class="nav-dock-item" id="nav-dock-discover">
+      <span class="nav-dock-icon">🏠</span>
+      <span class="nav-dock-label">Discover</span>
+    </a>
+    <a href="../shops/shops.html" class="nav-dock-item" id="nav-dock-shops">
+      <span class="nav-dock-icon">🏪</span>
+      <span class="nav-dock-label">Shops</span>
+    </a>
+    <a href="../orders/orders.html" class="nav-dock-item active" id="nav-dock-orders">
+      <span class="nav-dock-icon">📦</span>
+      <span class="nav-dock-label">Orders</span>
+    </a>
+  </div>
+
+  <!-- jsPDF CDN for pure JS PDF Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  <script src="../shared/database.js"></script>
+  <script src="orders.js"></script>
+</body>
+</html>

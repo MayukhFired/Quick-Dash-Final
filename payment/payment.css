@@ -1,0 +1,848 @@
+/* ── Room 6 Secure Checkout Stylesheet ────────────────────────────── */
+
+/* ── Page Layout ─────────────────────────────────────────── */
+.payment-page-container {
+  padding-top: 2rem;
+  padding-bottom: 5rem;
+}
+
+.payment-active-layout {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* ── Left Column: Delivery Map Info Block ─────────────────── */
+.delivery-address-map-block {
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+}
+
+.map-block-header {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  margin-bottom: 1.25rem;
+}
+
+.map-header-icon {
+  font-size: 2.2rem;
+  filter: drop-shadow(0 2px 4px rgba(27,67,50,.08));
+}
+
+.map-title {
+  font-family: var(--font-h);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--g900);
+  letter-spacing: -0.3px;
+}
+
+.map-subtitle {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  font-weight: 500;
+  margin-top: 0.15rem;
+}
+
+/* Leaflet Map height */
+#delivery-map {
+  height: 260px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--gray-200);
+  margin-bottom: 1.25rem;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.06);
+  z-index: 10; /* Lower than header z-index */
+}
+
+/* Address Fields Box */
+.address-edit-box {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 1.25rem;
+}
+
+.address-input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.address-input-row label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gray-600);
+}
+
+.address-input-row input {
+  height: 44px;
+  padding: 0 1rem;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: var(--font-b);
+  background: var(--white);
+  transition: var(--transition);
+}
+
+.address-input-row input:focus {
+  border-color: var(--g500);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.15);
+}
+
+/* Gift Order Checkbox */
+.gift-order-checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.2rem;
+}
+
+.gift-order-checkbox-row label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--g800);
+  cursor: pointer;
+  user-select: none;
+}
+
+.gift-order-checkbox-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--g600);
+}
+
+/* Gift Details subform */
+.gift-details-form {
+  border-top: 1px dashed var(--gray-200);
+  padding-top: 1.15rem;
+  margin-top: 0.25rem;
+}
+
+.gift-inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.15rem;
+}
+
+.gift-input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.gift-input-row label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gray-600);
+}
+
+.gift-input-row input {
+  height: 44px;
+  padding: 0 1rem;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: var(--font-b);
+  background: var(--white);
+  transition: var(--transition);
+}
+
+.gift-input-row input:focus {
+  border-color: var(--g500);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.15);
+}
+
+/* ── Methods Selection ────────────────────────────────────── */
+.payment-title {
+  font-family: var(--font-h);
+  font-weight: 800;
+  color: var(--g900);
+  font-size: 1.8rem;
+  letter-spacing: -0.5px;
+  margin-bottom: 1.75rem;
+  border-bottom: 1px solid var(--gray-200);
+  padding-bottom: 1rem;
+}
+
+.payment-methods-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* Method Card */
+.pay-method-card {
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  transition: var(--transition);
+  cursor: pointer;
+  box-shadow: var(--shadow-xs);
+  display: flex;
+  flex-direction: column;
+}
+
+.pay-method-card:hover {
+  border-color: var(--g400);
+  box-shadow: var(--shadow-sm);
+}
+
+.pay-method-card.active {
+  border-color: var(--g500);
+  box-shadow: var(--shadow-sm);
+}
+
+.pay-method-header {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  width: 100%;
+}
+
+.pay-icon {
+  font-size: 2.2rem;
+  filter: drop-shadow(0 2px 4px rgba(27,67,50,.08));
+}
+
+.pay-label-details h3 {
+  font-family: var(--font-h);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--g900);
+  margin-bottom: 0.15rem;
+}
+
+.pay-label-details p {
+  font-size: 0.82rem;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+
+/* Radio status */
+.pay-radio {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--gray-200);
+  flex-shrink: 0;
+  transition: var(--transition);
+  background: var(--white);
+}
+
+.pay-method-card.active .pay-radio {
+  border-color: var(--g500);
+  background: var(--g500);
+  position: relative;
+}
+
+.pay-method-card.active .pay-radio::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--white);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Option Body */
+.pay-method-body {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--gray-100);
+  padding-top: 1.25rem;
+  cursor: default;
+}
+
+/* UPI QR option */
+.upi-option-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.upi-instructions {
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.qr-code-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.qr-mock-code {
+  width: 120px;
+  height: 120px;
+  background: var(--g900);
+  border: 8px solid var(--white);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.qr-corner {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 4px solid var(--white);
+  background: var(--g900);
+}
+
+.qr-corner.top-left { top: 0; left: 0; }
+.qr-corner.top-right { top: 0; right: 0; }
+.qr-corner.bottom-left { bottom: 0; left: 0; }
+
+.qr-inner-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--g500);
+  color: var(--white);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 1.05rem;
+  border: 2px solid var(--white);
+  box-shadow: var(--shadow-xs);
+}
+
+.qr-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.qr-store-name {
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 1.05rem;
+  color: var(--g900);
+}
+
+.qr-upi-id {
+  font-size: 0.8rem;
+  color: var(--gray-400);
+  font-weight: 600;
+}
+
+.qr-amount-stamp {
+  font-family: var(--font-h);
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--g800);
+  background: var(--g50);
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-xs);
+  width: fit-content;
+  border: 1px solid var(--g100);
+  margin-top: 0.25rem;
+}
+
+.upi-field-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.upi-field-row span {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--gray-600);
+}
+
+.upi-input-group {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.upi-input-group input {
+  flex: 1;
+  height: 44px;
+  padding: 0 1rem;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: var(--font-b);
+  transition: var(--transition);
+}
+
+.upi-input-group input:focus {
+  border-color: var(--g500);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.15);
+}
+
+.btn-verify-upi {
+  background: var(--g50);
+  border: 1.5px solid var(--g200);
+  color: var(--g800);
+  padding: 0 1.25rem;
+  border-radius: var(--radius-sm);
+  font-weight: 700;
+  font-family: var(--font-h);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-verify-upi:hover {
+  background: var(--g100);
+  border-color: var(--g500);
+  color: var(--g900);
+}
+
+.upi-status-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-top: 0.2rem;
+}
+
+.upi-status-label.success { color: var(--g800); }
+.upi-status-label.error { color: #d90429; }
+
+/* ── Direct UPI Apps option ─────────────────────────────── */
+.upi-direct-apps-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.direct-apps-desc {
+  font-size: 0.82rem;
+  color: var(--gray-600);
+  font-weight: 500;
+  margin-bottom: 0.85rem;
+}
+
+.direct-apps-grid {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.btn-direct-app {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1.25rem;
+  font-family: var(--font-h);
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--g900);
+}
+
+.btn-direct-app:hover {
+  border-color: var(--g500);
+  background: var(--g50);
+  transform: translateY(-1px);
+}
+
+.app-brand-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-family: var(--font-h);
+  font-weight: 900;
+  font-size: 0.75rem;
+}
+
+.app-brand-icon.gp { background: #4285f4; }
+.app-brand-icon.pp { background: #5f259f; }
+.app-brand-icon.pm { background: #00baf2; }
+
+/* ── Net Banking option ────────────────────────────────── */
+.netbanking-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.netbanking-desc {
+  font-size: 0.82rem;
+  color: var(--gray-600);
+  font-weight: 500;
+  margin-bottom: 0.85rem;
+}
+
+.popular-banks-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1.15rem;
+}
+
+.btn-popular-bank {
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  text-align: left;
+  font-size: 0.82rem;
+  color: var(--g900);
+  transition: var(--transition);
+}
+
+.btn-popular-bank:hover {
+  border-color: var(--g500);
+  background: var(--g50);
+}
+
+.other-banks-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.other-banks-row label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gray-600);
+}
+
+.other-banks-row select {
+  height: 44px;
+  padding: 0 1rem;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-b);
+  font-size: 0.88rem;
+  background: var(--white);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.other-banks-row select:focus {
+  border-color: var(--g500);
+  outline: none;
+}
+
+/* ── Credit/Debit Card option ───────────────────────────── */
+.card-inputs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.15rem;
+}
+
+.card-input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.card-input-row.full {
+  grid-column: 1 / -1;
+}
+
+.card-input-row label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--gray-600);
+}
+
+.card-input-row input {
+  height: 44px;
+  padding: 0 1rem;
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+  font-family: var(--font-b);
+  transition: var(--transition);
+}
+
+.card-input-row input:focus {
+  border-color: var(--g500);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(82, 183, 136, 0.15);
+}
+
+/* ── Right Column: Summary Card ────────────────────────── */
+.payment-summary-section {
+  position: sticky;
+  top: calc(var(--header-h) + 1.5rem);
+}
+
+.summary-title {
+  font-family: var(--font-h);
+  font-weight: 800;
+  color: var(--g900);
+  font-size: 1.35rem;
+  letter-spacing: -0.3px;
+  margin-bottom: 1.25rem;
+}
+
+.summary-bill-card {
+  background: var(--white);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  box-shadow: var(--shadow-xs);
+}
+
+.bill-value-highlight {
+  font-family: var(--font-h);
+  font-size: 0.98rem;
+  color: var(--g900);
+  text-align: right;
+  display: block;
+}
+
+/* CTA Pay Button */
+.btn-pay-now {
+  background: linear-gradient(135deg, var(--g600), var(--g900));
+  color: var(--white);
+  border: none;
+  padding: 1.1rem 2rem;
+  border-radius: var(--radius-full);
+  font-family: var(--font-h);
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  width: 100%;
+  transition: var(--transition);
+  box-shadow: 0 4px 18px rgba(27,67,50,.25);
+  text-align: center;
+}
+
+.btn-pay-now:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 26px rgba(27,67,50,.35);
+}
+
+.btn-pay-now:active {
+  transform: translateY(0);
+}
+
+.btn-cancel-checkout {
+  background: none;
+  border: 1.5px solid var(--g200);
+  color: var(--g800);
+  font-weight: 700;
+  padding: 0.9rem 1.5rem;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  cursor: pointer;
+  margin-top: 0.85rem;
+  width: 100%;
+  transition: var(--transition);
+  font-family: var(--font-h);
+  text-align: center;
+}
+
+.btn-cancel-checkout:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-400);
+  color: var(--g900);
+}
+
+/* Razorpay indicator styling */
+.razorpay-creds-indicator {
+  margin-top: 1.25rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  background: #ebf3fc;
+  border: 1px dashed #1a73e8;
+  border-radius: var(--radius-sm);
+  padding: 0.85rem;
+  box-shadow: var(--shadow-xs);
+}
+
+.razorpay-icon {
+  font-size: 1.35rem;
+}
+
+.razorpay-creds-indicator p {
+  font-size: 0.72rem;
+  color: #1557b0;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+/* ── Fullscreen Success Transition Tick Overlay ──────────── */
+.order-placed-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(27, 67, 50, 0.95);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.order-placed-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.success-screen-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  position: relative;
+  width: 100%;
+}
+
+.green-tick-circle {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 6px solid var(--g500);
+  position: relative;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: tickCirclePop 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.green-tick-circle .checkmark-stem {
+  position: absolute;
+  width: 8px;
+  height: 44px;
+  background-color: var(--g500);
+  border-radius: var(--radius-full);
+  left: 66px;
+  top: 26px;
+  transform: rotate(45deg);
+}
+
+.green-tick-circle .checkmark-kick {
+  position: absolute;
+  width: 24px;
+  height: 8px;
+  background-color: var(--g500);
+  border-radius: var(--radius-full);
+  left: 41px;
+  top: 62px;
+  transform: rotate(45deg);
+}
+
+.success-quote {
+  font-family: var(--font-h);
+  font-weight: 800;
+  color: var(--white);
+  font-size: clamp(2.2rem, 6vw, 3.8rem);
+  letter-spacing: -1.5px;
+  text-transform: uppercase;
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  margin-top: 0.5rem;
+  animation: textSlideUp 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.success-redirect-note {
+  font-size: 0.95rem;
+  color: var(--g100);
+  max-width: 380px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.success-confetti {
+  position: absolute;
+  font-size: 2.8rem;
+  user-select: none;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+  animation: sparkleFloat 2.5s infinite ease-in-out alternate;
+}
+
+.confetti-1 { top: -40px; left: 15%; animation-delay: 0s; }
+.confetti-2 { top: 0px; right: 15%; animation-delay: 0.8s; }
+.confetti-3 { bottom: -60px; left: 45%; animation-delay: 1.5s; }
+
+/* ── Keyframe Animations ───────────────────────────────── */
+@keyframes tickCirclePop {
+  0% { transform: scale(0.2); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes textSlideUp {
+  0% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* ── Responsive styling overrides ────────────────────────── */
+@media (max-width: 768px) {
+  .payment-active-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  
+  .payment-summary-section {
+    position: static;
+  }
+  
+  #delivery-map {
+    height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gift-inputs-grid, .card-inputs-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .qr-code-wrapper {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .btn-direct-app {
+    width: 100%;
+  }
+  
+  .popular-banks-grid {
+    grid-template-columns: 1fr;
+  }
+}

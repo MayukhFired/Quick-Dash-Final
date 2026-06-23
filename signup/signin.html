@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickDash — Sign In</title>
+  <meta name="description" content="Sign in to QuickDash — order from local shops or manage your store." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="signup.css" />
+</head>
+<body>
+
+  <div class="bg-layer">
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+  </div>
+
+  <div class="page-wrapper">
+
+    <div class="brand-panel">
+      <div class="brand-content">
+        <div class="brand-logo">
+          <span class="logo-icon">Q</span>
+          <span class="logo-text">QuickDash</span>
+        </div>
+        <h2 class="brand-headline">Welcome<br />Back.</h2>
+        <p class="brand-sub">Sign in to continue shopping from neighbourhood stores or manage your merchant dashboard.</p>
+        <div class="brand-stats">
+          <div class="brand-stat">
+            <span class="stat-num">⚡</span>
+            <span class="stat-label">Fast checkout</span>
+          </div>
+          <div class="brand-stat">
+            <span class="stat-num">📦</span>
+            <span class="stat-label">Track orders</span>
+          </div>
+          <div class="brand-stat">
+            <span class="stat-num">🏪</span>
+            <span class="stat-label">Local shops</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-panel">
+
+      <button class="btn-skip" type="button" onclick="window.location.href='../discover/discover.html'">
+        Browse as guest →
+      </button>
+
+      <div class="form-step active" id="step-signin">
+        <div class="form-header">
+          <h1>Sign In</h1>
+          <p>Enter the email and password you used when signing up.</p>
+        </div>
+
+        <form id="signin-form" onsubmit="handleSignInSubmit(event)" novalidate>
+          <div class="form-group">
+            <label for="signin-email">Email Address <span class="required">*</span></label>
+            <input type="email" id="signin-email" class="form-control" placeholder="you@example.com" autocomplete="email" required />
+            <span class="field-error" id="err-signin-email"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="signin-password">Password <span class="required">*</span></label>
+            <div class="input-with-toggle">
+              <input type="password" id="signin-password" class="form-control" placeholder="Your password" autocomplete="current-password" required />
+              <button type="button" class="toggle-password" onclick="togglePassword('signin-password', this)">👁️</button>
+            </div>
+            <span class="field-error" id="err-signin-password"></span>
+          </div>
+
+          <div class="info-banner" id="signin-error-banner" style="display: none; margin-bottom: 1rem;" role="alert"></div>
+
+          <button type="submit" class="btn-primary" id="btn-signin-submit">
+            Sign In →
+          </button>
+        </form>
+
+        <div class="signin-link" style="margin-top: 1.5rem;">
+          New to QuickDash? <a href="signup.html">Create an account</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="../shared/auth.js"></script>
+  <script src="signin.js"></script>
+</body>
+</html>

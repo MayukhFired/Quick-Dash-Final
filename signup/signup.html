@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickDash — Sign Up</title>
+  <meta name="description" content="Join QuickDash — Support your local shops. Sign up as a Customer or Merchant." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="signup.css" />
+</head>
+<body>
+
+  <!-- Background Layer -->
+  <div class="bg-layer">
+    <div class="bg-blob blob-1"></div>
+    <div class="bg-blob blob-2"></div>
+    <div class="bg-blob blob-3"></div>
+  </div>
+
+  <!-- Signup Page Wrapper -->
+  <div class="page-wrapper">
+
+    <!-- Left Panel (Branding) -->
+    <div class="brand-panel">
+      <div class="brand-content">
+        <div class="brand-logo">
+          <span class="logo-icon">Q</span>
+          <span class="logo-text">QuickDash</span>
+        </div>
+        <h2 class="brand-headline">Shop Local.<br />Live Better.</h2>
+        <p class="brand-sub">We help local shops thrive in a world of giants. Join the movement — support your neighbourhood.</p>
+        <div class="brand-stats">
+          <div class="brand-stat">
+            <span class="stat-num">5,000+</span>
+            <span class="stat-label">Local Shops</span>
+          </div>
+          <div class="brand-stat">
+            <span class="stat-num">50k+</span>
+            <span class="stat-label">Customers</span>
+          </div>
+          <div class="brand-stat">
+            <span class="stat-num">12+</span>
+            <span class="stat-label">Cities</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Panel (Form) -->
+    <div class="form-panel">
+
+      <!-- Skip Button -->
+      <button class="btn-skip" id="btn-skip" onclick="skipSignup()">
+        Skip for now →
+      </button>
+
+      <!-- Step 1: Choose Role -->
+      <div class="form-step active" id="step-role">
+        <div class="form-header">
+          <h1>Create Account</h1>
+          <p>Who are you joining as today?</p>
+        </div>
+
+        <div class="role-selector">
+          <div class="role-card" id="role-customer" onclick="selectRole('customer')">
+            <div class="role-icon">🛍️</div>
+            <div class="role-info">
+              <strong>Customer</strong>
+              <span>Order from local shops near you</span>
+            </div>
+            <div class="role-check" id="check-customer"></div>
+          </div>
+
+          <div class="role-card" id="role-merchant" onclick="selectRole('merchant')">
+            <div class="role-icon">🏪</div>
+            <div class="role-info">
+              <strong>Merchant</strong>
+              <span>Register your local shop & grow</span>
+            </div>
+            <div class="role-check" id="check-merchant"></div>
+          </div>
+        </div>
+
+        <button class="btn-primary" id="btn-continue-role" onclick="goToStep('step-personal')" disabled>
+          Continue →
+        </button>
+
+        <div class="signin-link">
+          Already have an account? <a href="signin.html" id="go-signin">Sign in</a>
+        </div>
+      </div>
+
+      <!-- Step 2: Personal Info (Both Customer & Merchant) -->
+      <div class="form-step" id="step-personal">
+        <div class="step-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill" style="width: 50%"></div>
+          </div>
+          <span class="step-label" id="step-counter">Step 1 of 2</span>
+        </div>
+
+        <div class="form-header">
+          <button class="btn-back-inline" onclick="goToStep('step-role')">← Back</button>
+          <h1 id="personal-form-title">Your Details</h1>
+          <p id="personal-form-sub">Tell us a bit about yourself</p>
+        </div>
+
+        <form id="personal-form" onsubmit="handlePersonalSubmit(event)" novalidate>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="full-name">Full Name <span class="required">*</span></label>
+              <input type="text" id="full-name" class="form-control" placeholder="e.g. Riya Sharma" required />
+              <span class="field-error" id="err-name"></span>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number <span class="required">*</span></label>
+              <div class="input-with-prefix">
+                <span class="input-prefix">+91</span>
+                <input type="tel" id="phone" class="form-control" placeholder="9876543210" maxlength="10" required />
+              </div>
+              <span class="field-error" id="err-phone"></span>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email Address <span class="required">*</span></label>
+            <input type="email" id="email" class="form-control" placeholder="you@example.com" required />
+            <span class="field-error" id="err-email"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Set Password <span class="required">*</span></label>
+            <div class="input-with-toggle">
+              <input type="password" id="password" class="form-control" placeholder="Min. 8 characters" required />
+              <button type="button" class="toggle-password" onclick="togglePassword('password', this)">👁️</button>
+            </div>
+            <div class="password-strength" id="password-strength">
+              <div class="strength-bar">
+                <div class="strength-fill" id="strength-fill"></div>
+              </div>
+              <span class="strength-label" id="strength-label">Password strength</span>
+            </div>
+            <span class="field-error" id="err-password"></span>
+          </div>
+
+          <!-- Address Section -->
+          <div class="form-group">
+            <label>Your Address <span class="required">*</span></label>
+            <div class="address-options">
+              <button type="button" class="btn-location" id="btn-use-location" onclick="useCurrentLocation()">
+                <span class="loc-icon">📍</span>
+                Use Current Location
+              </button>
+              <span class="address-or">or enter manually</span>
+            </div>
+
+            <div class="location-detected" id="location-detected" style="display:none;">
+              <span class="loc-check">✅</span>
+              <span id="location-text">Location detected</span>
+              <button type="button" class="btn-clear-loc" onclick="clearLocation()">✕</button>
+            </div>
+
+            <div class="address-manual" id="address-manual-fields">
+              <input type="text" id="address-line" class="form-control" placeholder="House / Flat, Street name" />
+              <div class="form-row" style="margin-top:0.75rem;">
+                <input type="text" id="city" class="form-control" placeholder="City" />
+                <input type="text" id="pincode" class="form-control" placeholder="Pincode" maxlength="6" />
+              </div>
+            </div>
+            <span class="field-error" id="err-address"></span>
+          </div>
+
+          <!-- Merchant Step Counter -->
+          <div id="merchant-step-note" style="display:none;">
+            <div class="info-banner">
+              🏪 Almost there! Next step: your <strong>Shop Details</strong>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" id="btn-personal-next">
+            <span id="personal-btn-label">Create Account →</span>
+          </button>
+
+        </form>
+
+        <div class="signin-link">
+          Already have an account? <a href="signin.html" id="go-signin-2">Sign in</a>
+        </div>
+      </div>
+
+      <!-- Step 3: Merchant Shop Details (Merchants only) -->
+      <div class="form-step" id="step-merchant">
+        <div class="step-progress">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 100%"></div>
+          </div>
+          <span class="step-label">Step 2 of 2</span>
+        </div>
+
+        <div class="form-header">
+          <button class="btn-back-inline" onclick="goToStep('step-personal')">← Back</button>
+          <h1>Your Shop Details</h1>
+          <p>Help us verify and register your shop</p>
+        </div>
+
+        <form id="merchant-form" onsubmit="handleMerchantSubmit(event)" novalidate>
+
+          <div class="form-group">
+            <label for="shop-name">Shop Name <span class="required">*</span></label>
+            <input type="text" id="shop-name" class="form-control" placeholder="e.g. Sharma General Store" required />
+            <span class="field-error" id="err-shop-name"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="shop-category">Business Category <span class="required">*</span></label>
+            <select id="shop-category" class="form-control">
+              <option value="">— Select Category —</option>
+              <option value="grocery">🛒 Grocery / Kirana</option>
+              <option value="pharmacy">💊 Pharmacy / Medical</option>
+              <option value="bakery">🍞 Bakery & Confectionery</option>
+              <option value="fruits">🍎 Fruits & Vegetables</option>
+              <option value="electronics">💡 Electronics & Repair</option>
+              <option value="clothing">👕 Clothing & Textiles</option>
+              <option value="restaurant">🍛 Restaurant / Tiffin</option>
+              <option value="hardware">🔧 Hardware & Tools</option>
+              <option value="stationery">✏️ Stationery & Books</option>
+              <option value="other">🏪 Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="shop-upi">Merchant UPI ID for Payments <span class="required">*</span></label>
+            <input type="text" id="shop-upi" class="form-control" placeholder="e.g. sharmastore@okaxis" required />
+            <span class="field-error" id="err-shop-upi"></span>
+          </div>
+
+          <!-- Documents Section -->
+          <div class="docs-section">
+            <div class="docs-section-label">
+              Store Owner Verification (Mandatory)
+              <span class="docs-badge">Reviewed by Admin</span>
+            </div>
+            <p class="docs-hint">Aadhaar Card, Store Photo, and Owner Photo are required. Other licenses are optional.</p>
+
+            <!-- Mandatory Owner Photo Upload -->
+            <div class="doc-upload-card" id="upload-owner-photo" onclick="triggerUpload('file-owner-photo')">
+              <div class="doc-icon">👤</div>
+              <div class="doc-details">
+                <strong>Your Photo (Owner Photo) <span class="required">*</span></strong>
+                <span>Clear selfie or portrait photo</span>
+              </div>
+              <div class="doc-upload-status" id="status-owner-photo">
+                <span class="upload-btn">Upload</span>
+              </div>
+              <input type="file" id="file-owner-photo" accept=".jpg,.jpeg,.png" style="display:none;" onchange="handleFileUpload(this, 'status-owner-photo', 'upload-owner-photo')" />
+            </div>
+
+            <!-- Mandatory Store Photo Upload -->
+            <div class="doc-upload-card" id="upload-store-photo" onclick="triggerUpload('file-store-photo')">
+              <div class="doc-icon">📸</div>
+              <div class="doc-details">
+                <strong>Store Front Photo <span class="required">*</span></strong>
+                <span>Photo showing the store banner or facade</span>
+              </div>
+              <div class="doc-upload-status" id="status-store-photo">
+                <span class="upload-btn">Upload</span>
+              </div>
+              <input type="file" id="file-store-photo" accept=".jpg,.jpeg,.png" style="display:none;" onchange="handleFileUpload(this, 'status-store-photo', 'upload-store-photo')" />
+            </div>
+
+            <!-- Aadhaar Card Upload (Mandatory) -->
+            <div class="doc-upload-card" id="upload-aadhaar" onclick="triggerUpload('file-aadhaar')">
+              <div class="doc-icon">🪪</div>
+              <div class="doc-details">
+                <strong>Owner's Aadhaar / ID Proof</strong>
+                <span>Aadhaar Card, PAN, Voter ID, Passport</span>
+              </div>
+              <div class="doc-upload-status" id="status-aadhaar">
+                <span class="upload-btn">Upload</span>
+              </div>
+              <input type="file" id="file-aadhaar" accept=".jpg,.jpeg,.png,.pdf" style="display:none;" onchange="handleFileUpload(this, 'status-aadhaar', 'upload-aadhaar')" />
+            </div>
+
+            <div class="doc-upload-card" id="upload-license" onclick="triggerUpload('file-license')">
+              <div class="doc-icon">📋</div>
+              <div class="doc-details">
+                <strong>Food License / FSSAI</strong>
+                <span>Required for food/grocery shops (optional for others)</span>
+              </div>
+              <div class="doc-upload-status" id="status-license">
+                <span class="upload-btn">Upload</span>
+              </div>
+              <input type="file" id="file-license" accept=".jpg,.jpeg,.png,.pdf" style="display:none;" onchange="handleFileUpload(this, 'status-license', 'upload-license')" />
+            </div>
+
+            <div class="doc-upload-card" id="upload-other" onclick="triggerUpload('file-other')">
+              <div class="doc-icon">📄</div>
+              <div class="doc-details">
+                <strong>Other Business License</strong>
+                <span>GST Certificate, Trade License, Shop Act, etc. (if available)</span>
+              </div>
+              <div class="doc-upload-status" id="status-other">
+                <span class="upload-btn">Upload</span>
+              </div>
+              <input type="file" id="file-other" accept=".jpg,.jpeg,.png,.pdf" style="display:none;" onchange="handleFileUpload(this, 'status-other', 'upload-other')" />
+            </div>
+          </div>
+
+          <div class="info-banner" style="margin: 1.25rem 0;">
+            🔒 Your documents are encrypted and only shared with our admin team for verification. You'll be notified within <strong>24–48 hours</strong>.
+          </div>
+
+          <button type="submit" class="btn-primary" id="btn-merchant-submit">
+            Submit for Approval →
+          </button>
+
+        </form>
+      </div>
+
+      <!-- Step 4: Success Screen -->
+      <div class="form-step" id="step-success">
+        <div class="success-container">
+          <div class="success-icon" id="success-anim">🎉</div>
+          <h2 id="success-title">Welcome Aboard!</h2>
+          <p id="success-message">Your account has been created. Start exploring local shops near you.</p>
+          <div class="success-card" id="merchant-pending" style="display:none;">
+            <span class="pending-icon">⏳</span>
+            <div>
+              <strong>Approval Pending</strong>
+              <p>Our admin team will review your documents and activate your shop within 24–48 hours. You'll receive an email update.</p>
+            </div>
+          </div>
+          <button class="btn-primary" onclick="goToDashboard()" style="margin-top: 2rem;">
+            Go to Dashboard →
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="../shared/auth.js"></script>
+  <script src="signup.js"></script>
+</body>
+</html>

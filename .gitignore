@@ -1,0 +1,5 @@
+# Local integration secrets
+shared/integrations.config.js
+.env
+.env.*
+!.env.example

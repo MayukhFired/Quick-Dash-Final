@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>QuickDash — Shop Cards & Local Stores</title>
+  <meta name="description" content="Browse local registered shops near you on QuickDash. Shop local, live better." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../discover/discover.css" />
+  <link rel="stylesheet" href="shops.css" />
+</head>
+<body>
+
+  <!-- ───────────────────────────────────────── HEADER ── -->
+  <header class="site-header" id="site-header">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a href="../discover/discover.html" class="brand-logo" id="logo-link">
+        <div class="logo-badge">Q</div>
+        <span class="logo-name">QuickDash</span>
+      </a>
+
+      <!-- Search Bar (filters shops on this page) -->
+      <div class="search-wrapper" id="search-wrapper">
+        <div class="search-bar" id="search-bar">
+          <span class="search-icon">🔍</span>
+          <input
+            type="search"
+            id="search-input"
+            class="search-input"
+            placeholder='Search store name or category...'
+            autocomplete="off"
+            oninput="handleStoreSearch()"
+          />
+          <button class="search-clear" id="search-clear" style="display:none;" onclick="clearStoreSearch()">✕</button>
+        </div>
+      </div>
+
+      <!-- Quick-Access Header Cart Button -->
+      <a href="../cart/cart.html" class="btn-header-cart" id="header-cart-btn" aria-label="Go to cart">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-badge-count" id="header-cart-count">0</span>
+      </a>
+
+      <!-- Auth / Profile Button -->
+      <div class="header-auth" id="header-auth">
+        <!-- Filled by JS based on login state -->
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ───────────────────────────────── LOCATION BAR ── -->
+  <div class="location-bar">
+    <div class="location-bar-inner">
+      <button class="location-btn" id="location-btn" onclick="detectLocation()">
+        <span class="loc-pin">📍</span>
+        <span id="location-label">Market Center, New Delhi</span>
+        <span class="loc-change">Change</span>
+      </button>
+      <span class="delivery-tag">⚡ Delivery in 10–30 mins</span>
+    </div>
+  </div>
+
+  <!-- ───────────────────────────────────── MAIN CONTENT ── -->
+  <main>
+    
+    <!-- Hero / Intro -->
+    <div class="shops-intro-section">
+      <div class="intro-headline-row">
+        <h1 class="page-title">Local Shop Cards</h1>
+        <div class="category-badge-pill" id="active-category-pill" style="display: none;">
+          Category: <span id="category-pill-text">Grocery</span>
+          <button onclick="clearCategoryFilter()" class="clear-pill-btn">✕</button>
+        </div>
+      </div>
+      <p class="page-subtitle">Supporting local stores near your doorstep. Select a store to view their full catalog.</p>
+    </div>
+
+    <!-- ──────────────────────── STORES SHOWCASE ── -->
+    <section class="stores-section">
+      
+      <!-- Near Me Section -->
+      <div class="stores-group-section" id="section-near-me">
+        <h2 class="stores-group-title">Near me <span class="group-count-badge" id="count-near-me">0</span></h2>
+        <div class="stores-grid" id="grid-near-me">
+          <!-- Injected dynamically by JS -->
+        </div>
+      </div>
+
+      <!-- Other Stores Section -->
+      <div class="stores-group-section" id="section-other-stores">
+        <h2 class="stores-group-title">Other stores <span class="group-count-badge" id="count-other-stores">0</span></h2>
+        <div class="stores-grid" id="grid-other-stores">
+          <!-- Injected dynamically by JS -->
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ───────────────────────────────────────── FOOTER ── -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+
+      <!-- Brand Column -->
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <div class="logo-badge sm">Q</div>
+          <span class="logo-name">QuickDash</span>
+        </div>
+        <p class="footer-tagline">Empowering local shops. Connecting communities. One delivery at a time.</p>
+        <div class="footer-socials">
+          <a href="#" class="social-btn" aria-label="Instagram">📸</a>
+          <a href="#" class="social-btn" aria-label="Twitter">🐦</a>
+          <a href="#" class="social-btn" aria-label="Facebook">👥</a>
+          <a href="#" class="social-btn" aria-label="WhatsApp">💬</a>
+        </div>
+      </div>
+
+      <!-- Links Columns -->
+      <div class="footer-links-group">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Mission</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Press</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <ul>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Track Order</a></li>
+            <li><a href="#">Return Policy</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Legal</h4>
+          <ul>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+            <li><a href="#">Merchant Agreement</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Join Us / CTA Column -->
+      <div class="footer-cta-col">
+        <div class="footer-cta-card">
+          <div class="cta-icon">🛵</div>
+          <h4>Become a Delivery Partner</h4>
+          <p>Earn on your own schedule. Join hundreds of delivery partners in your city.</p>
+          <a href="javascript:void(0)" class="btn-join-us" id="btn-join-delivery" onclick="openPartnerRegistration()">Join Us →</a>
+        </div>
+        <div class="footer-cta-card" style="margin-top: 1rem;">
+          <div class="cta-icon">🏪</div>
+          <h4>List Your Shop</h4>
+          <p>Already a merchant? Register your shop on QuickDash and grow your business.</p>
+          <a href="../signup/signup.html" class="btn-join-us outline">Register Shop →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <span>© 2025 QuickDash. All rights reserved. Made with 💚 for local communities.</span>
+      <div class="footer-bottom-links">
+        <a href="#">Terms</a>
+        <a href="#">Privacy</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ──────────────────────────────── PROFILE DRAWER (Slide-in) ── -->
+  <div class="drawer-overlay" id="drawer-overlay" onclick="closeProfileDrawer()"></div>
+  <div class="profile-drawer" id="profile-drawer">
+    <div class="drawer-header">
+      <h3>My Profile</h3>
+      <button class="drawer-close" onclick="closeProfileDrawer()">✕</button>
+    </div>
+    <div class="drawer-body" id="drawer-body">
+      <!-- Injected dynamically by JS -->
+    </div>
+  </div>
+
+  <!-- Sleek Floating Bottom Navigation Dock -->
+  <div class="floating-nav-dock">
+    <a href="../discover/discover.html" class="nav-dock-item" id="nav-dock-discover">
+      <span class="nav-dock-icon">🏠</span>
+      <span class="nav-dock-label">Discover</span>
+    </a>
+    <a href="../shops/shops.html" class="nav-dock-item active" id="nav-dock-shops">
+      <span class="nav-dock-icon">🏪</span>
+      <span class="nav-dock-label">Shops</span>
+    </a>
+    <a href="../orders/orders.html" class="nav-dock-item" id="nav-dock-orders">
+      <span class="nav-dock-icon">📦</span>
+      <span class="nav-dock-label">Orders</span>
+    </a>
+  </div>
+
+  <script src="../shared/database.js"></script>
+  <script src="../shared/partner-register.js"></script>
+  <script src="shops.js"></script>
+</body>
+</html>
