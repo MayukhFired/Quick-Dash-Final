@@ -6,17 +6,6 @@ const state = {
   currentUser: null
 };
 
-// ── Merchant Floating Dock Swap ────────────────────────────────────
-function adjustFloatingDockForMerchant() {
-  if (!state.currentUser || state.currentUser.role !== 'merchant') return;
-  const shopsDock = document.getElementById('nav-dock-shops');
-  if (shopsDock) {
-    shopsDock.href = '../yourstore/yourstore.html';
-    shopsDock.id = 'nav-dock-yourstore';
-    shopsDock.querySelector('.nav-dock-label').textContent = 'Your Store';
-  }
-}
-
 // ── DOM Elements ──────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   loadUserProfile();
@@ -35,78 +24,6 @@ function loadUserProfile() {
   }
   renderAuthButton();
 }
-
-function renderAuthButton() {
-  const container = document.getElementById('header-auth');
-  if (!container) return;
-
-  if (state.currentUser) {
-    const initial = (state.currentUser.name || 'U').charAt(0).toUpperCase();
-    container.innerHTML = `
-      <button class="btn-profile" id="profile-btn" onclick="openProfileDrawer()" aria-label="Open profile">
-        <div class="profile-avatar">${initial}</div>
-        <span>${state.currentUser.name ? state.currentUser.name.split(' ')[0] : 'Profile'}</span>
-      </button>`;
-  } else {
-    container.innerHTML = `
-      <button class="btn-auth" id="auth-btn" onclick="window.location.href='../signup/signin.html'">
-        Sign Up / Log In
-      </button>`;
-  }
-}
-
-// ── Profile Drawer Implementation ──────────────────────────────────
-function openProfileDrawer() {
-  if (!state.currentUser) return;
-  const body    = document.getElementById('drawer-body');
-  const initial = (state.currentUser.name || 'U').charAt(0).toUpperCase();
-  const role    = state.currentUser.role === 'merchant' ? '🏪 Merchant' : '🛍️ Customer';
-
-  body.innerHTML = `
-    <div class="profile-info-row">
-      <div class="profile-avatar-lg">${initial}</div>
-      <div>
-        <div class="profile-name">${escapeHTML(state.currentUser.name || 'User')}</div>
-        <div class="profile-email">${escapeHTML(state.currentUser.email || '')}</div>
-        <span class="profile-role-badge">${role}</span>
-      </div>
-    </div>
-    <ul class="drawer-menu">
-      <li><a href="../orders/orders.html"><span class="menu-icon">📦</span> My Orders</a></li>
-      <li><a href="#"><span class="menu-icon">📍</span> Saved Addresses</a></li>
-      <li><a href="#"><span class="menu-icon">❤️</span> Favourite Shops</a></li>
-      <li><a href="#"><span class="menu-icon">🏷️</span> Coupons & Offers</a></li>
-      <li><a href="#"><span class="menu-icon">⚙️</span> Account Settings</a></li>
-      <li><a href="#"><span class="menu-icon">🎧</span> Help & Support</a></li>
-      <li><button class="danger" onclick="logoutUser()"><span class="menu-icon">🚪</span> Log Out</button></li>
-    </ul>`;
-
-  document.getElementById('drawer-overlay').classList.add('open');
-  document.getElementById('profile-drawer').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-window.openProfileDrawer = openProfileDrawer;
-
-function closeProfileDrawer() {
-  document.getElementById('drawer-overlay').classList.remove('open');
-  document.getElementById('profile-drawer').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-window.closeProfileDrawer = closeProfileDrawer;
-
-function logoutUser() {
-  if (confirm('Are you sure you want to log out?')) {
-    localStorage.removeItem('quickdash_user');
-    state.currentUser = null;
-    closeProfileDrawer();
-    renderAuthButton();
-    window.location.href = '../discover/discover.html';
-  }
-}
-
-window.logoutUser = logoutUser;
 
 // ── Load past orders from localStorage ─────────────────────────────
 function loadOrdersHistory() {

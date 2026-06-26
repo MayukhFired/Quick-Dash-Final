@@ -103,97 +103,8 @@
 
   </main>
 
-  <!-- ───────────────────────────────────────── FOOTER ── -->
-  <footer class="site-footer">
-    <div class="footer-inner">
-
-      <!-- Brand Column -->
-      <div class="footer-brand">
-        <div class="footer-logo">
-          <div class="logo-badge sm">Q</div>
-          <span class="logo-name">QuickDash</span>
-        </div>
-        <p class="footer-tagline">Empowering local shops. Connecting communities. One delivery at a time.</p>
-        <div class="footer-socials">
-          <a href="#" class="social-btn" aria-label="Instagram">📸</a>
-          <a href="#" class="social-btn" aria-label="Twitter">🐦</a>
-          <a href="#" class="social-btn" aria-label="Facebook">👥</a>
-          <a href="#" class="social-btn" aria-label="WhatsApp">💬</a>
-        </div>
-      </div>
-
-      <!-- Links Columns -->
-      <div class="footer-links-group">
-        <div class="footer-col">
-          <h4>Company</h4>
-          <ul>
-            <li><a href="#">About Us</a></li>
-            <li><a href="#">Our Mission</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Careers</a></li>
-            <li><a href="#">Press</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Support</h4>
-          <ul>
-            <li><a href="#">Help Center</a></li>
-            <li><a href="#">Track Order</a></li>
-            <li><a href="#">Return Policy</a></li>
-            <li><a href="#">Contact Us</a></li>
-          </ul>
-        </div>
-        <div class="footer-col">
-          <h4>Legal</h4>
-          <ul>
-            <li><a href="#">Terms & Conditions</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Cookie Policy</a></li>
-            <li><a href="#">Merchant Agreement</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- Join Us / CTA Column -->
-      <div class="footer-cta-col">
-        <div class="footer-cta-card">
-          <div class="cta-icon">🛵</div>
-          <h4>Become a Delivery Partner</h4>
-          <p>Earn on your own schedule. Join hundreds of delivery partners in your city.</p>
-          <a href="javascript:void(0)" class="btn-join-us" id="btn-join-delivery" onclick="openPartnerRegistration()">Join Us →</a>
-        </div>
-        <div class="footer-cta-card" style="margin-top: 1rem;">
-          <div class="cta-icon">🏪</div>
-          <h4>List Your Shop</h4>
-          <p>Already a merchant? Register your shop on QuickDash and grow your business.</p>
-          <a href="../signup/signup.html" class="btn-join-us outline">Register Shop →</a>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Bottom Bar -->
-    <div class="footer-bottom">
-      <span>© 2025 QuickDash. All rights reserved. Made with 💚 for local communities.</span>
-      <div class="footer-bottom-links">
-        <a href="#">Terms</a>
-        <a href="#">Privacy</a>
-        <a href="#">Sitemap</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ──────────────────────────────── PROFILE DRAWER (Slide-in) ── -->
-  <div class="drawer-overlay" id="drawer-overlay" onclick="closeProfileDrawer()"></div>
-  <div class="profile-drawer" id="profile-drawer">
-    <div class="drawer-header">
-      <h3>My Profile</h3>
-      <button class="drawer-close" onclick="closeProfileDrawer()">✕</button>
-    </div>
-    <div class="drawer-body" id="drawer-body">
-      <!-- Injected dynamically by JS -->
-    </div>
-  </div>
+  <div id="footer-mount" data-variant="full"></div>
+  <div id="drawer-mount"></div>
 
   <!-- Sleek Floating Bottom Navigation Dock -->
   <div class="floating-nav-dock">
@@ -212,6 +123,7 @@
   </div>
 
   <script src="../shared/database.js"></script>
+  <script src="../shared/components.js"></script>
   <script src="../shared/partner-register.js"></script>
   <script src="shops.js"></script>
 </body>
